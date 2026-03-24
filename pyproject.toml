@@ -1,0 +1,30 @@
+[project]
+name = "cowork-semantic-search"
+version = "0.1.0"
+description = "Claude Code plugin for local semantic search over document folders"
+requires-python = ">=3.11"
+license = "MIT"
+
+dependencies = [
+    "fastmcp>=2.0,<3.0",
+    "sentence-transformers>=3.0,<4.0",
+    "lancedb>=0.20,<1.0",
+    "langchain-text-splitters>=0.3,<1.0",
+]
+
+[project.optional-dependencies]
+pdf = ["pymupdf>=1.25,<2.0"]
+docx = ["python-docx>=1.1,<2.0"]
+pptx = ["python-pptx>=1.0,<2.0"]
+all = [
+    "pymupdf>=1.25,<2.0",
+    "python-docx>=1.1,<2.0",
+    "python-pptx>=1.0,<2.0",
+]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+semantic-search-server = "server.main:run"
+
+[tool.pytest.ini_options]
+pythonpath = ["."]

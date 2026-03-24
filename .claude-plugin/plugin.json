@@ -1,0 +1,9 @@
+{
+  "name": "semantic-search",
+  "version": "0.1.0",
+  "description": "Search your local documents with natural language. Index folders of PDFs, Word docs, markdown, and more — then ask questions in English or German and get answers with source citations.",
+  "author": {
+    "name": "Omar Drljevic"
+  },
+  "keywords": ["search", "rag", "documents", "semantic", "pdf", "local"]
+}
