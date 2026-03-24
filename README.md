@@ -1,8 +1,11 @@
 # cowork-semantic-search
 
+[![GitHub stars](https://img.shields.io/github/stars/ZhuBit/cowork-semantic-search?style=social)](https://github.com/ZhuBit/cowork-semantic-search/stargazers)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org/downloads/)
 [![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-green)](LICENSE)
 [![MCP Compatible](https://img.shields.io/badge/MCP-compatible-purple)](https://modelcontextprotocol.io)
+
+> If you find this useful, consider giving it a ⭐ — it helps others discover the project.
 
 **Local semantic search for your documents. No API keys. No cloud. Works with any MCP client.**
 
@@ -246,6 +249,10 @@ Contributions welcome -- open an issue or submit a PR.
 - Multi-folder named indexes
 - Metadata filtering (date ranges, tags, custom fields)
 - Watch mode (auto-reindex on file changes)
+
+## Support
+
+If this is useful to you, consider giving it a ⭐ — it helps others find the project.
 
 ## License
 
